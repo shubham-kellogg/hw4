@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Tacostagram Final</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Tacostagram Final</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <link rel="stylesheet" href="/stylesheets/application.css">
-  </head>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3pVYMZ2HI5mCpf6HnA/JzQiXlc5Ti2aCma3c7F5VC2/SFnGEu7wJ5eMw1x" crossorigin="anonymous">
+  
+  <!-- Your custom stylesheets should be loaded after Bootstrap's to allow overriding -->
+  <link rel="stylesheet" href="/stylesheets/application.css">
+</head>
 
-  <body>
-    <div>
-      <%= flash["notice"] %>
+<body>
+  <!-- Bootstrap Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Signup', new_user_registration_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
-    </div>
+  </nav>
 
+  <!-- Main Content -->
+  <div class="container">
+    <% if flash["notice"] %>
+      <div class="alert alert-info" role="alert">
+        <%= flash["notice"] %>
+      </div>
+    <% end %>
+    
     <%= yield %>
+  </div>
+
+   <!-- Bootstrap JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ44jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
   </body>
 </html>
