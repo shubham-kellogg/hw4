@@ -3,6 +3,13 @@ class SessionsController < ApplicationController
     # This will render the login form
   end
 
+  before_action :redirect_if_logged_in, only: [:new, :create]
+
+private
+
+def redirect_if_logged_in
+  redirect_to root_path, notice: "You are already signed in." if user_signed_in?
+end
   def create
     user = User.find_by(email: params[:email])
 
