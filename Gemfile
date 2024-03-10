@@ -9,6 +9,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # gem "image_processing", ">= 1.2"
 # gem "aws-sdk-s3", require: false
+gem "devise" # Add this line to include Devise
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
