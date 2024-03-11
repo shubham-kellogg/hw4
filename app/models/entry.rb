@@ -1,3 +1,3 @@
 class Entry < ApplicationRecord
-  has_one_attached :uploaded_image
+  has_one_attached :file
 end

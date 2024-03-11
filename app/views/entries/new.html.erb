@@ -1,6 +1,6 @@
 <h1>New Entry</h1>
 
-<%= form_with(url: entries_path, local: true) do |form| %>
+<%= form_with model: @entry, local: true do |form| %>
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="place_id" value="<%= params[:place_id] %>">
 
@@ -24,5 +24,10 @@
     <%= form.file_field :uploaded_image, class: 'form-control' %>
   </div>
 
-  <%= form.submit 'Save', class: 'btn btn-primary' %>
+ <%= form.file_field :file %>
+  <%= form.submit %>
+
+  <% if entry.file.attached? %>
+  <%= link_to entry.file.filename, url_for(entry.file) %>
+
 <% end %>
